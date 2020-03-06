@@ -1,0 +1,37 @@
+version: '3.5'
+
+services:
+    api:
+        image: 'node:13.0-alpine'
+        container_name: ApiArticle
+        ports:
+            - 127.0.0.1:3000:3000
+        volumes:
+            - './api:/home/node/app'
+        working_dir: /home/node/app
+        depends_on:
+            - mongo
+        links:
+            - mongo
+        command: ['sh', '-c', 'npm install && npm run start:dev']
+        restart: always
+
+    client:
+        image: 'node:13.0-alpine'
+        container_name: ArticleClient
+        ports:
+            - 127.0.0.1:4200:4200
+        volumes:
+            - './client:/home/node/app'
+        working_dir: /home/node/app
+        command: ['sh', '-c', 'npm install && npm run start']
+        restart: always
+
+    mongo:
+        image: mongo
+        container_name: mongo
+        environment:
+            - MONGO_DATABASE = angular8-crud
+        ports:
+            - 0.0.0.0:27017:27017
+      
