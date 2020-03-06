@@ -1,4 +1,4 @@
-## nestapi-angular-docker
+## nestjs-angular-docker
 
 * Api with CRUD for articles with NestJS / MongodB
 * Client with Angular/ Material 
